@@ -1,5 +1,3 @@
-# ClassPython
-Class course and learn of Python
 #AULA 1***********************
 #Python é case sensitive
 print('essa é a função print')
@@ -897,7 +895,7 @@ padrao = ([0-9{2}][\.]?[0-9]{3})#diz que o ponto não é obrigatório
 #\d busca por caractesres numéricos
 #\D traz todos os caracteres que NÃO são números
 #\s qq caracter de espaçamento "[\t\n\r\f\v]"
-#\S qq caractere que NÃO SEJA DE  PESÇAMENTO
+#\S qq caractere que NÃO SEJA DE  ESPAÇAMENTO
 #\w caractere alfanumériico ou sublinhado "[a-zA-Z0-9_]"
 #\W caractere que não seja alfanumérico ou sublinhado "[^a-zA-Z0-9_]"
 #{} quantidade de ocorrência
@@ -910,40 +908,506 @@ padrao = re.compile("e", re.IGNORECASE)#vai localizar todas as ocorrências, ind
 
 
 
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 11 - Servidor web python
+#no cmd, para iniciar o servidor web nativo do python
+python -m http.server
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 12 - EXECUTANDO O BeautifulSoup
+
+#executar o servidor pelo cmd
+pytho -m http.server
+
+#importar a bliblioteca
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen('http://localhost:8000/teste.html')#carrega o arquivo
+bsObj = BeautifulSoup(html.read(), "html.parser")#ler o arquivo
+
+print(bsObj.h1)#imprime o primeiro h1
+print(bsObj.title)#imprime o títula da pág
+print(bsObj.find_all("h1")#imprime todas as tags h1
+
+for link in bsObj.find_all('a'):
+      print(link)
+
+for link in bsObj.find_all('a'):
+      print(link.get('href'))
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 14 - Mais sobre o BeautifulSoup
+
+# get_text = retorna todo o texto de uma página
+print(bsObj.get_text())
+
+# .tag a primeira ocorrência da tag informada
+print(bsObj.title)#mostrará o conteúdo da primeira tag title informada
+
+# .tag.name = retorno o nome da tag
+# .tag['atributo']
+print(bsObj.body['class'])
+print(bsObj.button['type'])
+
+#id
+print(bsObj.find(id='descrição'))
+
+#biblioteca para expressões regulares
+import re
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 15 - Mais sobre o BeautifulSoup
+
+#expressões regulares ajudam quando há um padrão do que pretende-se localizar
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 17 - Biblioteca LXML
+
+#lendo arquivo xml
+import lxml import etree
+
+funcionarios = etree.parse("funcionarios.xml")#ler arquivo
+
+#imprimindo arquivo
+print(funcionarios.find("funcionario"))#aqui será impresso o objeto funcionário
+#o objeto(tag) funcionário pertence ao arquivo
+
+print(funcionarios.getroot().find("funcionario"))
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 18 - Instalando Scrapy
 
 
 
+#lxml precisa de algumas bibliotecas C, sendo assim é necessário intalar o Visual C++ 14.0
+#end: http://landinhub.visualstudio.com/visual-cpp-build-tools
+#1º passo instalar Visual C++
+
+#2º passo instalar o Scrapy no CMD
+# $ pip install scrapy
+
+#3º passo importa bibliteca scrapy via cmd
+#python
+#import scrapy
+#scrapy version
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 19 - Trabalhando com Scrapy - parte 1
+
+#1º configirar projeto scrapy cmd:
+      #$ scrapy startproject nome_do_projeto
+      
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 19 - Trabalhando com Scrapy - parte 2
+
+#trabalhando com scrapy shell
+#abrindo o scrapy shell cmd
+#scrapy shell "http://paginaquequeremosabrir.com"
+    
+      
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 20 - Trabalhando com Scrapy - parte 3 - gerando arquivos
+
+#$ scrapy crawl nome_da_classe -o nomedoarquivo.formato
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 21 - Trabalhando com Scrapy - parte 4 - seguindo links
+
+#1. criar o projeto $ scrapy starproject nomedoprojeto
+#2. abrir o projeto
+import scrapy
+class QuotesSpider (scrapy.Spider):
+      name = "citacoes"
+      star_urls = ['http://quotes.toscrape.com/page/1/']
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 24 - APIs - parte 1
+
+#testar métodos: get, post, put e delete de apis: https://hurl.it
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 25 - APIs - parte 2
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 26 - APIs - parte 3
+
+#apis google
+#https://console.developers.google.com
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 27 - Armazenando arquivos
+
+
+#baixar arquivos à partir de qq qualquer url
+#urllib.request.urlretrieve
+
+from urllib.request import urlretrieve
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+site = "ehttp://www.destemperados.com.br"
+html = urlopen(site+'receitas')
+bsobj = BeautifulSoup(html)
+imagemLocation = bsObj.find("a", {"title": "Destemperados"}).find("img") ["src"] urlretrive(site+imagemLocation, "teste.jpg")
+
+#xiste a biblioteca csv para trabalhar (ler e escrever) com arquivos csv
+
+#para ler arquivos dicionários: utilizar DictReader
+
+import csv
+
+estado = []
+with open("estados.csv", encoding="utf-8") as arq:
+      reader = csv.DictReader(arq)
+      for linha in reader:
+      print(linha['Nome'] + " - " + linha['Capital'])
+
+#para escrever utilizando dicionário
+
+import csv
+
+try:
+      arq = open("pessoas.cvs", "w", newline="")
+      cabecalho = ["nome", "sobrenome"]
+      writer = csv.DictWriter(arq, fieldnames=cabecalho)
+      whiter.writeheader()
+      writer.writerow("nome": "Max", "sobrenome":"Pinheiro")
+final:
+      arq.close()
+
+#scraping em tabela html e salvando em csv
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 31 - Conectando ao banco MySQL com MYSQL connector/Python
+
+#importando o connector - só dá certo caso, no momento da instalação, tenha habilitado a instalação do connector
+
+import mysql.connector
+
+#2ª opção baixar o conector direto do site do MySQL
+#3ª forma usando o pip
+pip install mysql-connector-python
+
+#acessar mysql usando o python
+
+import mysql.connector
+
+conexao = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='agenda')
+
+conexao.close()
+
+#outra forma de conexão
+
+from mysql.connector import connection
+
+conexao = connection.MySQLConnection(user='root', password='1234', host='127.0.0.1', database='agenda')
+
+conexao.close()
+
+#os dois métodos são válidos
+
+#tratando erros
+
+import mysql.connector
+from mysql.connector import error code
+
+try:
+      con = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='agenda')
+except mysql.connector.Error as erro
+      if erro.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print('acesso negado')
+      elif erro.errno == errorcode.ER_BAD_DB_ERROR:
+          print('BANCO DE DADOS NÃO EXISTE')
+      else:
+          print(erro)
+else:
+      con.close()
 
 
 
+#usando kwargs **
+
+import mysql.connector
+    #criando um dicionário
+config = {'user': 'root',
+          'password': '1234',
+          'host':'127.0.0.1',
+          'database':'agenda'
+    }
+conexao = mysql.connector.connect(**config)
+conexao=close()
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 32 - Executando instruções SQL com Python
+
+#importando o MySQL connector/Python
+import mysql.connector
+
+#criando o objeto de conexão através do connect com os parâmetros:
+#usuário, senha, servidor e base de dados
+#o connect retorna um objeto MySQLConnection
+conexao = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='agenda')
+
+#criando um cursor
+#cursor é uma estrutura de controle que permite percorrer
+#registros, além de facilitar a adição e remoção de registros do banco de dados
+cursor = conexao.cursor()
+#montando uma string com insert
+inserir_contato = ("insert into contatos (nome, telefone, celular) values ('Pateta', '(61)1251 1212', '(21) 2154 12155')")
+#executando o comando insert
+cursor.execute(inserir_contato)
+#gravando a informação permanentemente
+conexao.commit()
+#fechando o cursor
+cursor.close()
+#fechando a conexão
+conexao.close()
+
+#pode ser utilizado uma tupla para passar os dados
+inserir = 'insert into contatos (nome, telefone, celular) values (%s, %s, %s)'
+dados = ('tio patinhas', '(61)9999-8888', '(61)5555-1111')
+cursor.execute(inserir, dados)
+
+
+#pode também ser usado um dicionário
+inserir = 'insert into contatos (nome, telefone, celular) values (%(a)s, %(b)s, %(c)s)'
+dados = {'a':'tio patinhas',
+         'b'':(61)9999-8888',
+         'c':'(61)5555-1111'}
+cursor.execute(inserir, dados)
+
+#para realizar uma consulta e mostrar os dados
+import mysql.connector
+conexao = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='agenda')
+cursor = conexao.cursor()
+consulta = ("select nome, telefone, celular from nometabela where nome like 'M%'")
+cursor.execute(consulta)
+
+for (nome, telefone, celular) in cursor:
+      print(f"Nome: {nome}, telefone: {telefone}, celular: {celular}")
+cursor.close()
+conexao.close()
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 33 - Armazenando conteúdo do scraping em MySQL
+
+#importando as biblios para conexão
+from urllib.request import urlopen
+from bs4 import Beatifulsop
+import randomimport mysql.connector
+import re
+
+dados_conexao = {"user": "root", "password":"1234", "host": "127.0.0.1", "database": "dados"}
+conexao = mysql.connector.connect(**dados_conexao)
+cursor = conexao.cursor()
+def gravar (titulo, url, conteudo):
+      cursor.execute("insert into paginas (titulo, url, conteudo) values (%s,%s,%s)", (titulo, url, conteudo))
+      conexao.commit()
+
+#fazendo o scraping
+def getLinks ()
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 34 - Lendo documentos - leitura de arquivo de texto
+
+#para a leitura do arquivo
+from urllib.request import urlopen
+pagina - urlopen('endereco.txt')
+print(pagina.read())
+
+#neste caso não usa-se BeautifulSoup, por que não há marcação html
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 35 - Lendo documentos - leitura de arquivo CSV
+
+from urllib.request import urlopen
+from io import String IO
+import csv
+
+url = input ("informe o caminho do arquivo CSV:")
+dados = urlopen(url).read().decode(encoding="utf-8", errors='ignore')
+arqDados = StringIO(dados)#carrega o arquivo de dados em memória
+csvReader = csv.reader(arqDados)
+#pode se utilizar o DictReader para retornar ao invés de linhas um dicionário
+    #csvReader = csv.DictReader(arqDados)
+
+for linha in csvReader:
+      print(linha)
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 36 - Lendo documentos - leitura de arquivo PDF
+
+#biblioteca PDFMiner3k
+
+#1º passo instalar a biblioteca
+#cmd $ pip install pdfminer3k
+
+from pdfminer.pdfinterp import PDFResourceManager, process_pdf
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from io import StringIO
+
+#abrir arquivo PDF local
+from io import open
+#abrir arquivo PDF online
+from urllib.request import urlopen
+
+
+#LAParams
+      #define os parãmetros que serão passados para a função TextConverter.
+      #line_overlap=0.5 (sobreposição de linha)
+      #char_margin=2.0 (margem do caracter)
+      #line_margin=0.5 (margem da linha)
+      #word_margin=0.1 (margem da palavra)
+      #paragraph_indent=None (identificação de parágrafo)
+
+#TextCoverter
+      #converte o conteúdo do PDF em texto
+#HTMLConverter
+      #converte o conteúdo do PDF em HTML
+#XMLConverter
+      #converte o conteúdo do PDF em XML
+
+      
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 37 - Lendo documentos - leitura de arquivo DOCX
+
+#instalar biblioteca python-docx
+pip install python-docx
+
+import docx
+doc = docx.Documento('arquivo.docx')
+for a in doc.paragraphs:#percorre os parágrafos do documento
+     print(a.text)#imprime o conteúdo 
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 37 - Lendo documentos - leitura de arquivo xlsx
+
+#instalar biblioteca openpyxl
+$ pip install openpyxl
+
+from openpyxl import load_workbook
+
+#contar strings
+lista = ['m','a',2]
+for x in lista:
+    print(x)
+    if x == str():
+        print(len(x))#resultado 1
+
+
+#fatiando
+texto = 'texto pronto -'
+texto.split()
+#saída ['texto', 'pronto', '-']
+
+texto = 'texto'
+texto.split()#saida ['texto']
+
+
+#remover caracteres especiais
+#pandas, aqui já foi passado o arquivo xlsx para train[]
+train['new_justifi'] = train['justificativa'].str.replace('[^\w\s]','')
+
+
+#função head() do pandas - exibe as 5 primeiras linhas
+
+
+    
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 39 - Lendo json
+
+import json #biblioteca build in
+
+#criando o json----------------------------------------------------------------------------
+
+dados = {'chave': 'valor',
+         'chave2': 'valor2'}
+
+#método dumps converte o dicionário em json
+
+dados_json = json.dumps(dados)
+
+print(dados_json)
+
+#salvando em formato json
+
+with open('nomearquivo.json', 'w') as arq:
+      arq.white(json_dumps(dados))
+
+#lendo json----------------------------------------------------------------------------
+import json
+
+with open('nomearquivo.json', 'r') as arq:
+      conteudo = arq.read()
+      dados_json = json.loads(conteudo)#deserializa o json
+      print(dados_json['chave2'])#imprimindo o conteúdo da chave 2
+      
+
+#lendo novo arquivo ----------------------------------------------------------------------------
+
+import json
+
+with open('arqjson.json', 'r', encoding='utf-8') as arq:#utf-8 para leitura correta com caracteres especiais
+      conteudo = arq.read()
+      print('*' * 50)
+      print('conteudo do arquivo: \n', conteudo)
+      dados_json = json.loads(conteudo)
+      print('json completo: \n', dados_json)
+      print('*' * 50)
+      print('primeiro objeto (dados_json[0]) \n', dados_json[0])
+      print('*' * 50)
+      print('loop em todso os objetos:')
+      for dados in dados_json:
+      print('curso: ', dados['indice'], )
+
+#lendo json direto da internet ----------------------------------------------------------------------------
+
+import json
+
+from urllib.request import urlopen
+
+dados = urlopen('http://endereço_do_arquivo_na_internet.json').read()
+dados = json_loads(dados)
+
+print(dados)
+
+
+#imprimir por índice arquivos com objeto dentro do json----------------------------------------------------------------------------
+
+print(dados-json['nomeobjt'][0])#imprindo índice 0 do objeto nomeobjt
+print(dados-json['nomeobjt'][0]['chave'])#índice 0, imprimir o valor da chave x
+
+
+#******CURSO UDEMY - PYTHON WEB SCRAPING************************
+#AULA 40 - limpando dados
 
 
 
+#verificar a versão do pandas instalado, via jupyter
+In [76]: import pandas as pd
+
+In [77]: pd.__version__
+Out[77]: '0.12.0-933-g281dc4e'
+
+ pd.show_versions(as_json=False)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#REMOVER CARACTERES ESPECIAIS
+import re
+texto = 'novo texto para - testar o que é carcter # especial;/_ saúde'
+string_nova = re.sub(u'[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ: ]', '', texto)
+print(string_nova)
 
