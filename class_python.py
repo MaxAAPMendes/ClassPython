@@ -715,7 +715,7 @@ scypi.org
 #montar um gráfico com módulo matplotlib.pyplot
 #após a chamada da bliclioteca, incluir o comando abaixo para garantir que o gráfico será executado no jupyter e não em outra janela
 %matplotlib notebook
-matplotlib inline
+%matplotlib inline
 
 x = ['a', 'b', 'c', 'd', 'e']#RÓTULOS
 y = [1,2,3,4,5]#VALORES
@@ -727,6 +727,43 @@ plt.show()
 # store to file
 plt.savefig("img/us_wine.png", format="png")
 
+#criando um gráfico de linhaimport 
+matplotlib.pyplot as plt
+%matplotlib inline
+x = [1,3,5]
+y = [1,4,6]
+plt.plot(x,y)
+plt.ylabel('eixo Y')
+plt.xlabel('eixo x')
+plt.title('título')
+plt.show()
+
+#gráfico barras
+plt.bar(x,y, label ='barras', color = 'r')
+
+#gráfico barras duplo
+plt.bar(x,y, label ='barras', color = 'r')
+plt.bar(x2,y2, label ='barras2', color = 'y')
+
+#histograma
+plt.hist(x,y)
+
+#scatter - pontinhos
+plt.scartter(x,y)
+
+#pizza
+fatias = [7,2,2,13]
+atividades = ['dormir', 'comer', 'trabalhar', 'passear']
+cores = ['c','m', 'r', 'k']
+plt.pie(fatias, labels=atividades, colors = cores)
+plt.show()
+
+#vários tipos de gráficos subplots aula MATPLOTLIB GRÁFICOS A PARTIR DO NUMPY da DSA - curso python fundamentos 04:06'
+
+#gráficos 3d from mpl_toolkits.mplot.azes3d import axes3D
+
+
+#SciPy - scientific python
 
 #Livro Python Básico*******************************************
 #for - página 49
@@ -2674,3 +2711,10 @@ while (sair == 'n'):
     sair = input('Deseja sair? "s" ou "n"')
 
 
+#Scikit-learn=======================================
+'''
+biblioteca para machine learnin
+biblioteca para criação de modelos
+
+Regressão - quanto custa? quantos são?
+'''
